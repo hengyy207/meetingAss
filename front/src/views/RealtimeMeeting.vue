@@ -4,7 +4,7 @@
     <!-- 顶栏 -->
     <div class="head">
       <div class="head-left">
-        <span class="head-icon">🎙️</span>
+        <AudioWaveform class="head-icon" :size="30" :stroke-width="1.75" />
         <h1 class="title">实时转写</h1>
       </div>
       <div class="head-right">
@@ -108,6 +108,7 @@
 <script setup>
 import { ref, computed, onBeforeUnmount } from 'vue'
 import { ElMessage } from 'element-plus'
+import { AudioWaveform } from 'lucide-vue-next'
 import SpeakerTimeline from '../components/SpeakerTimeline.vue'
 import { useAudioCapture } from '../composables/useAudioCapture'
 import { useRealtimeWs } from '../composables/useRealtimeWs'
@@ -246,7 +247,8 @@ onBeforeUnmount(() => {
 }
 
 .head-icon {
-  font-size: 26px;
+  color: var(--color-accent);
+  flex-shrink: 0;
 }
 
 .title {
@@ -430,7 +432,7 @@ onBeforeUnmount(() => {
   font-size: 11px;
   font-weight: 600;
   color: var(--color-accent);
-  background: rgba(99, 102, 241, 0.1);
+  background: var(--color-accent-soft);
   padding: 2px 9px;
   border-radius: 999px;
 }

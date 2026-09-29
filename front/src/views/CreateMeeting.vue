@@ -75,7 +75,8 @@
     <!-- 完成后跳转详情 -->
     <div v-if="done" class="done-row">
       <button class="btn-ink" @click="$router.push(`/meeting/${meetingInfo.id}`)">
-        查看会议报告 →
+        查看会议报告
+        <ChevronRight :size="17" :stroke-width="2" style="vertical-align: -3px; margin-left: 4px" />
       </button>
     </div>
   </div>
@@ -84,6 +85,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { ElMessage } from 'element-plus'
+import { ChevronRight } from 'lucide-vue-next'
 import AudioUpload from '../components/AudioUpload.vue'
 import AiFlow from '../components/AiFlow.vue'
 import SummaryCard from '../components/SummaryCard.vue'

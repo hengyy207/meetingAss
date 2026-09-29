@@ -13,24 +13,39 @@
         @click="$router.push(`/meeting/${m.id}`)"
       >
         <!-- 左侧图标 -->
-        <div class="item-icon">🎙️</div>
+        <div class="item-icon">
+          <FileAudio :size="24" :stroke-width="1.75" />
+        </div>
 
         <!-- 中间信息 -->
         <div class="item-body">
           <div class="item-title">{{ m.title }}</div>
-          <div class="item-meta">{{ m.created_time }}</div>
+          <div class="item-meta">{{ formatMeetingTime(m.created_time) }}</div>
         </div>
 
         <!-- 右侧状态 + 删除 + 箭头 -->
         <StatusTag :status="m.status" />
         <button class="item-del" title="删除" @click.stop="removeMeeting(m)">删除</button>
-        <div class="item-arrow">→</div>
+        <ChevronRight class="item-arrow" :size="18" :stroke-width="1.75" />
       </div>
     </div>
 
-    <!-- 空状态 -->
+    <!-- 空状态：简洁插画 + 引导按钮 -->
     <div v-if="!loading && !meetings.length" class="empty card">
-      还没有会议记录，去上传第一段录音吧
+      <div class="empty-art">
+        <svg width="120" height="96" viewBox="0 0 120 96" fill="none" aria-hidden="true">
+          <!-- 麦克风线稿插画 -->
+          <rect x="48" y="10" width="24" height="42" rx="12" stroke="#c7c9d1" stroke-width="2.5" />
+          <path d="M38 44a22 22 0 0 0 44 0" stroke="#c7c9d1" stroke-width="2.5" stroke-linecap="round" />
+          <path d="M60 66v14" stroke="#c7c9d1" stroke-width="2.5" stroke-linecap="round" />
+          <path d="M46 80h28" stroke="#c7c9d1" stroke-width="2.5" stroke-linecap="round" />
+          <!-- 声波点缀 -->
+          <path d="M92 34v14M100 28v26M108 36v10" stroke="#a5b4fc" stroke-width="2.5" stroke-linecap="round" />
+          <path d="M18 34v14M10 28v26M2 36v10" stroke="#a5b4fc" stroke-width="2.5" stroke-linecap="round" />
+        </svg>
+      </div>
+      <p class="empty-text">还没有会议记录，上传第一段录音试试</p>
+      <button class="btn-ink empty-btn" @click="$router.push('/create')">开始新的会议</button>
     </div>
   </div>
 </template>
@@ -38,7 +53,9 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
+import { FileAudio, ChevronRight } from 'lucide-vue-next'
 import { listMeetings, deleteMeeting } from '../api/meeting'
+import { formatMeetingTime } from '../utils/format'
 import StatusTag from '../components/StatusTag.vue'
 
 // 会议列表（来自后端）
@@ -103,20 +120,21 @@ async function removeMeeting(m) {
   gap: 18px;
   padding: 22px 26px;
   cursor: pointer;
-  transition: transform 0.15s ease;
+  transition: transform 0.15s ease, background 0.15s ease;
 }
 
 .item:hover {
   transform: translateY(-1px);
+  background: #fafafa;
 }
 
 .item-icon {
-  font-size: 28px;
   width: 52px;
   height: 52px;
   flex-shrink: 0;
   background: var(--color-canvas);
-  border-radius: 14px;
+  border-radius: var(--radius-md);
+  color: var(--color-muted);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -143,7 +161,7 @@ async function removeMeeting(m) {
 
 .item-arrow {
   color: var(--color-muted);
-  font-size: 18px;
+  flex-shrink: 0;
 }
 
 /* 删除按钮：低调显示，hover 时变红提示危险操作 */
@@ -163,10 +181,30 @@ async function removeMeeting(m) {
   background: rgba(229, 72, 77, 0.08);
 }
 
+/* 空状态：插画 + 引导 */
 .empty {
   margin-top: 32px;
   text-align: center;
   color: var(--color-muted);
-  padding: 60px;
+  padding: 64px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.empty-art {
+  margin-bottom: 6px;
+  opacity: 0.9;
+}
+
+.empty-text {
+  margin: 0;
+  font-size: 15px;
+}
+
+.empty-btn {
+  margin-top: 16px;
+  cursor: pointer;
 }
 </style>

@@ -10,7 +10,9 @@
   >
     <!-- 已选文件 -->
     <div v-if="file" class="upload-file">
-      <div class="upload-file-icon">🎵</div>
+      <div class="upload-file-icon">
+        <FileAudio :size="34" :stroke-width="1.5" />
+      </div>
       <div class="upload-file-name">{{ file.name }}</div>
       <div class="upload-file-size">{{ formatSize(file.size) }}</div>
       <button class="upload-clear" @click.stop="clearFile">重新选择</button>
@@ -18,7 +20,9 @@
 
     <!-- 空状态 -->
     <div v-else class="upload-empty">
-      <div class="upload-icon">🎤</div>
+      <div class="upload-icon">
+        <Mic :size="38" :stroke-width="1.5" />
+      </div>
       <div class="upload-text">拖入 mp3 / wav 文件，或点击选择</div>
     </div>
 
@@ -34,6 +38,7 @@
 
 <script setup>
 import { ref } from 'vue'
+import { Mic, FileAudio } from 'lucide-vue-next'
 
 // 选中的文件（暂存本地，暂不上传）
 const file = defineModel({ default: null })
@@ -91,8 +96,11 @@ function formatSize(bytes) {
 }
 
 .upload-icon {
-  font-size: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 10px;
+  color: var(--color-muted);
 }
 
 .upload-text {
@@ -105,7 +113,10 @@ function formatSize(bytes) {
 }
 
 .upload-file-icon {
-  font-size: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-accent);
 }
 
 .upload-file-name {

@@ -1,6 +1,6 @@
 /* =========================
    全局设计变量与基础样式
-   风格：Apple 系统灰底 + 大圆角卡片 + AI 靛蓝点缀
+   风格：中性灰底 + 统一圆角卡片 + 单一主色（深靛蓝）强调
    ========================= */
 :root {
   /* 颜色 */
@@ -9,20 +9,21 @@
   --color-ink: #1d1d1f;         /* 主文字 / 主按钮 */
   --color-muted: #6e6e73;       /* 次要文字 */
   --color-line: #e5e5ea;        /* 分隔线 */
-  --color-accent: #5e5ce6;      /* AI 靛蓝，仅用于 AI 相关元素 */
-  --color-accent-soft: #eeedff; /* 靛蓝浅底 */
-  --color-ok: #34c759;          /* 成功 */
-  --color-warn: #ff9f0a;        /* 警告 / 处理中 */
-  --color-danger: #ff3b30;      /* 失败 */
+  --color-accent: #4f46e5;      /* 全站唯一强调色：深靛蓝 */
+  --color-accent-hover: #4338ca; /* 主色 hover 态 */
+  --color-accent-soft: #eef2ff; /* 主色浅底 */
+  --color-ok: #16a34a;          /* 状态色：绿 = 成功 */
+  --color-warn: #ea9a15;        /* 状态色：橙 = 进行中 / 警告 */
+  --color-danger: #dc2626;      /* 状态色：红 = 失败 */
 
-  /* 圆角：三级 */
-  --radius-lg: 24px;
-  --radius-md: 16px;
-  --radius-sm: 12px;
+  /* 圆角：统一 16px，小元素 12px */
+  --radius-lg: 16px;
+  --radius-md: 12px;
+  --radius-sm: 10px;
 
-  /* 阴影：柔和不抢戏 */
-  --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.08);
-  --shadow-soft: 0 4px 14px rgba(0, 0, 0, 0.05);
+  /* 阴影：贴地柔和，不"浮空" */
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.04);
+  --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.04), 0 2px 8px rgba(0, 0, 0, 0.03);
 
   /* 字体：苹果系统栈 + 中文回退 */
   --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display",

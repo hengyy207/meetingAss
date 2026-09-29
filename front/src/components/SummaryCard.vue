@@ -2,7 +2,10 @@
   <!-- AI 会议摘要卡片 -->
   <div class="card">
     <div class="card-head">
-      <h3>📌 会议摘要</h3>
+      <h3 class="card-title">
+        <FileText :size="18" :stroke-width="1.75" />
+        会议摘要
+      </h3>
       <span class="tag-ai">AI 生成</span>
     </div>
 
@@ -16,6 +19,8 @@
 </template>
 
 <script setup>
+import { FileText } from 'lucide-vue-next'
+
 defineProps({
   summary: {
     type: Object,
@@ -35,6 +40,18 @@ defineProps({
 .card-head h3 {
   margin: 0;
   font-size: 18px;
+}
+
+/* 标题：图标与文字垂直居中 */
+.card-title {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.card-title svg {
+  color: var(--color-accent);
+  flex-shrink: 0;
 }
 
 .theme {

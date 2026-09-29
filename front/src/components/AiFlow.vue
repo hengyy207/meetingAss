@@ -16,8 +16,8 @@
     >
       <!-- 节点圆点 -->
       <div class="flow-dot">
-        <span v-if="i < activeIndex" class="flow-check">✓</span>
-        <span v-else class="flow-dot-icon">{{ step.icon }}</span>
+        <Check v-if="i < activeIndex" class="flow-check" :size="20" :stroke-width="2.5" />
+        <component v-else :is="step.icon" :size="20" :stroke-width="1.75" />
       </div>
 
       <!-- 节点文字 -->
@@ -30,6 +30,8 @@
 </template>
 
 <script setup>
+import { Upload, Mic, Sparkles, FileText, Check } from 'lucide-vue-next'
+
 defineProps({
   // 当前进行中的步骤下标，-1 表示未开始
   activeIndex: {
@@ -38,11 +40,12 @@ defineProps({
   },
 })
 
+// 步骤图标统一 Lucide 线性风格
 const steps = [
-  { icon: '📁', label: '上传音频' },
-  { icon: '🎤', label: '语音识别' },
-  { icon: '🧠', label: 'AI 分析' },
-  { icon: '📄', label: '生成报告' },
+  { icon: Upload, label: '上传音频' },
+  { icon: Mic, label: '语音识别' },
+  { icon: Sparkles, label: 'AI 分析' },
+  { icon: FileText, label: '生成报告' },
 ]
 </script>
 
@@ -72,15 +75,13 @@ const steps = [
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
+  color: var(--color-muted);
   z-index: 1;
   transition: all 0.3s ease;
 }
 
 .flow-check {
   color: var(--color-ok);
-  font-weight: 700;
-  font-size: 20px;
 }
 
 /* 已完成：绿色描边 */
@@ -99,10 +100,10 @@ const steps = [
 @keyframes breathe {
   0%,
   100% {
-    box-shadow: 0 0 0 0 rgba(94, 92, 230, 0.35);
+    box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.35);
   }
   50% {
-    box-shadow: 0 0 0 12px rgba(94, 92, 230, 0);
+    box-shadow: 0 0 0 12px rgba(79, 70, 229, 0);
   }
 }
 

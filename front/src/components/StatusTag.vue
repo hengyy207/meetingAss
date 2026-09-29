@@ -42,8 +42,9 @@ const label = computed(
   white-space: nowrap;
 }
 
+/* 语义统一：绿 = 成功，橙 = 进行中，灰 = 等待，红 = 失败 */
 .status-done {
-  background: #eafaef;
+  background: #ecfdf3;
   color: var(--color-ok);
 }
 
@@ -51,33 +52,34 @@ const label = computed(
   background: var(--color-ok);
 }
 
-.status-processing {
-  background: var(--color-accent-soft);
-  color: var(--color-accent);
-}
-
-.status-processing .status-dot {
-  background: var(--color-accent);
-}
-
-/* 中间态（待处理/转录中/待总结/总结中）共用靛蓝样式 */
-.status-pending,
+/* 进行中：转录中 / 总结中 / 处理中 */
 .status-transcribing,
-.status-transcribed,
-.status-summarizing {
-  background: var(--color-accent-soft);
-  color: var(--color-accent);
+.status-summarizing,
+.status-processing {
+  background: #fef6e7;
+  color: var(--color-warn);
+}
+
+.status-transcribing .status-dot,
+.status-summarizing .status-dot,
+.status-processing .status-dot {
+  background: var(--color-warn);
+}
+
+/* 等待中：待处理 / 待总结 */
+.status-pending,
+.status-transcribed {
+  background: #f1f1f3;
+  color: var(--color-muted);
 }
 
 .status-pending .status-dot,
-.status-transcribing .status-dot,
-.status-transcribed .status-dot,
-.status-summarizing .status-dot {
-  background: var(--color-accent);
+.status-transcribed .status-dot {
+  background: var(--color-muted);
 }
 
 .status-failed {
-  background: #ffeceb;
+  background: #fef0f0;
   color: var(--color-danger);
 }
 

@@ -9,7 +9,7 @@
         <h1 class="title">{{ meeting.title }}</h1>
         <StatusTag :status="meeting.status" />
       </div>
-      <div class="meta">{{ meeting.created_time }}</div>
+      <div class="meta">{{ formatMeetingTime(meeting.created_time) }}</div>
     </div>
 
     <!-- 加载中 -->
@@ -49,6 +49,7 @@
 import { ref, computed, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { getMeeting } from '../api/meeting'
+import { formatMeetingTime } from '../utils/format'
 import StatusTag from '../components/StatusTag.vue'
 import SummaryCard from '../components/SummaryCard.vue'
 import TaskList from '../components/TaskList.vue'

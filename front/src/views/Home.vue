@@ -23,12 +23,14 @@
 
     <!-- 快速开始：整块可点击的工作台入口 -->
     <div class="start-card card" @click="$router.push('/create')">
-      <div class="start-icon">🎤</div>
+      <div class="start-icon">
+        <Mic :size="26" :stroke-width="1.75" />
+      </div>
       <div class="start-body">
         <div class="start-title">开始新的会议</div>
         <div class="start-desc">拖入 mp3 / wav 文件，AI 自动完成剩下的一切</div>
       </div>
-      <div class="start-arrow">→</div>
+      <ChevronRight class="start-arrow" :size="22" :stroke-width="1.75" />
     </div>
 
     <!-- 最近会议 -->
@@ -46,7 +48,7 @@
       >
         <div class="recent-main">
           <div class="recent-title">{{ m.title }}</div>
-          <div class="recent-meta">{{ m.created_time }}</div>
+          <div class="recent-meta">{{ formatMeetingTime(m.created_time) }}</div>
         </div>
         <StatusTag :status="m.status" />
       </div>
@@ -56,7 +58,9 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
+import { Mic, ChevronRight } from 'lucide-vue-next'
 import { listMeetings } from '../api/meeting'
+import { formatMeetingTime } from '../utils/format'
 import StatusTag from '../components/StatusTag.vue'
 
 // 会议列表（来自后端，已按创建时间倒序）
@@ -107,8 +111,10 @@ const recentMeetings = computed(() => meetings.value.slice(0, 3))
 }
 
 .stat-num {
-  font-size: 30px;
-  font-weight: 700;
+  font-size: 32px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
 }
 
 .stat-label {
@@ -124,15 +130,24 @@ const recentMeetings = computed(() => meetings.value.slice(0, 3))
   align-items: center;
   gap: 20px;
   cursor: pointer;
-  transition: transform 0.15s ease;
+  transition: transform 0.15s ease, background 0.15s ease;
 }
 
 .start-card:hover {
   transform: translateY(-2px);
+  background: #fafafa;
 }
 
 .start-icon {
-  font-size: 36px;
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
+  border-radius: var(--radius-md);
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .start-title {
@@ -148,8 +163,8 @@ const recentMeetings = computed(() => meetings.value.slice(0, 3))
 
 .start-arrow {
   margin-left: auto;
-  font-size: 22px;
   color: var(--color-muted);
+  flex-shrink: 0;
 }
 
 /* ===== 最近会议 ===== */
@@ -183,11 +198,12 @@ const recentMeetings = computed(() => meetings.value.slice(0, 3))
   justify-content: space-between;
   padding: 20px 26px;
   cursor: pointer;
-  transition: transform 0.15s ease;
+  transition: transform 0.15s ease, background 0.15s ease;
 }
 
 .recent-item:hover {
   transform: translateY(-1px);
+  background: #fafafa;
 }
 
 .recent-title {

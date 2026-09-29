@@ -2,7 +2,10 @@
   <!-- 转录卡片：多语种混说场景 —— 说话人 · 语种 + 原文 + 中文译文 -->
   <div class="transcript-card card">
     <div class="transcript-head">
-      <h2>🎙️ 实时转写</h2>
+      <h2 class="transcript-title">
+        <AudioLines :size="20" :stroke-width="1.75" />
+        实时转写
+      </h2>
       <span v-if="isMock" class="tag-mock">模拟识别</span>
       <span v-else class="tag-ai">Fun-ASR · 说话人分离</span>
     </div>
@@ -33,6 +36,7 @@
 
 <script setup>
 import { computed } from 'vue'
+import { AudioLines } from 'lucide-vue-next'
 
 const props = defineProps({
   // 句子列表：[{ speaker_id, language, language_name, begin_time, end_time, text, translation }]
@@ -96,6 +100,18 @@ function fmtTime(ms) {
   font-size: 20px;
 }
 
+/* 标题：图标与文字垂直居中 */
+.transcript-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.transcript-title svg {
+  color: var(--color-accent);
+  flex-shrink: 0;
+}
+
 .tag-mock {
   font-size: 12px;
   color: #c26a0a;
@@ -141,7 +157,7 @@ function fmtTime(ms) {
   font-size: 12px;
   font-weight: 600;
   color: var(--color-accent);
-  background: rgba(99, 102, 241, 0.1);
+  background: var(--color-accent-soft);
   padding: 2px 10px;
   border-radius: 999px;
 }
