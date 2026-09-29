@@ -1,0 +1,118 @@
+/* =========================
+   全局设计变量与基础样式
+   风格：Apple 系统灰底 + 大圆角卡片 + AI 靛蓝点缀
+   ========================= */
+:root {
+  /* 颜色 */
+  --color-canvas: #f5f5f7;      /* 页面底色 */
+  --color-card: #ffffff;        /* 卡片 */
+  --color-ink: #1d1d1f;         /* 主文字 / 主按钮 */
+  --color-muted: #6e6e73;       /* 次要文字 */
+  --color-line: #e5e5ea;        /* 分隔线 */
+  --color-accent: #5e5ce6;      /* AI 靛蓝，仅用于 AI 相关元素 */
+  --color-accent-soft: #eeedff; /* 靛蓝浅底 */
+  --color-ok: #34c759;          /* 成功 */
+  --color-warn: #ff9f0a;        /* 警告 / 处理中 */
+  --color-danger: #ff3b30;      /* 失败 */
+
+  /* 圆角：三级 */
+  --radius-lg: 24px;
+  --radius-md: 16px;
+  --radius-sm: 12px;
+
+  /* 阴影：柔和不抢戏 */
+  --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.08);
+  --shadow-soft: 0 4px 14px rgba(0, 0, 0, 0.05);
+
+  /* 字体：苹果系统栈 + 中文回退 */
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+    "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 键盘焦点可见性 */
+:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* 尊重"减少动态效果"系统设置 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ============ 通用卡片 ============ */
+.card {
+  background: var(--color-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: 28px;
+}
+
+/* ============ 通用按钮 ============ */
+.btn-ink {
+  background: var(--color-ink) !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 30px !important;
+  padding: 12px 28px !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+}
+
+.btn-ink:hover {
+  opacity: 0.85;
+}
+
+.btn-ghost {
+  background: transparent !important;
+  color: var(--color-ink) !important;
+  border: 1px solid var(--color-line) !important;
+  border-radius: 30px !important;
+  padding: 12px 28px !important;
+  font-size: 15px !important;
+}
+
+.btn-ghost:hover {
+  background: #f1f1f3 !important;
+}
+
+/* ============ AI 标签 ============ */
+.tag-ai {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* ============ 状态圆点 ============ */
+.status-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+}
